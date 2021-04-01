@@ -31,7 +31,13 @@
 
 &nbsp;
 
-**IMPORTANT ADD IN GENERAL EXPRESS SET UP WITH ROUTING**
+
+  ** TODO ASAP
+**IMPORTANT ADD IN GENERAL EXPRESS SET UP WITH ROUTING** 
+
+** ADD IN PROXY SERVER DONE
+
+** DO NODE AGGREGRATE DATA
 
                 -----------------------------------------------------------------------------
 
