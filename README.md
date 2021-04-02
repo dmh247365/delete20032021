@@ -39,6 +39,8 @@
 
 ** DO NODE AGGREGRATE DATA
 
+* fix promise information
+
                 -----------------------------------------------------------------------------
 
 ### A) Node echo terminal commands:-
