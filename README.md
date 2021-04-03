@@ -41,6 +41,8 @@
 
 * fix promise information
 
+** do promise error handling and progation of errors
+
                 -----------------------------------------------------------------------------
 
 ### A) Node echo terminal commands:-
