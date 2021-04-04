@@ -43,6 +43,9 @@
 
 ** do promise error handling and progation of errors
 
+
+** fix on monday
+
                 -----------------------------------------------------------------------------
 
 ### A) Node echo terminal commands:-
@@ -1952,9 +1955,11 @@ app.use((err, req, res, next) => {
 })
 ```
 
-Our First middleware function just checks to see if the request method is a `GET` if it isn't then it creates an error with a 405 error status code. We invoke `next()` with the actual error generated, so we are now going to invoke the next error middleware.
+Our First middleware function just checks to see if the request method is a `GET` if it isn't then it creates an error with a 405 error status code. 
+We invoke `next()` with the actual error generated, so we are now going to invoke the next error middleware.
+`next()` with no error argument, will just invoke the next bit of middleware
 
-Note:- we `return` out of the `if block` and the function, if we didn't then `next(createError(404))` would run.
+Note:- we `return` out of the `if block` and the function (ie the arrow function), if we didn't then `next(createError(404))` would run.
 
 The error middleware (which we know is error middleware as it has 4 parameters the first one being err) in this case receives the error we generated and responds out to the user the status code of 405 and the error message generated.
 
