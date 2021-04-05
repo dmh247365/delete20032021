@@ -44,7 +44,7 @@
 ** do promise error handling and progation of errors
 
 
-** fix on monday
+** add in 7.0 and do 7.1 & do 8.2
 
                 -----------------------------------------------------------------------------
 

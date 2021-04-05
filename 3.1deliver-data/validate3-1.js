@@ -35,7 +35,7 @@ async function dataCheck () {
 
   const [content] = await once(res, 'data')
 
-  assert.equal(
+  assert.strict.equal(
     content.toString(),
     data,
     `${HOST} must respond with result calling data lib function`
