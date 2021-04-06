@@ -41,45 +41,41 @@
 
 ### general set up without using express generator
 
-1 - app.js file
-2 - server.js file
-3 - routes/index.js
-3 - npm packages: express@4, http-errors@1, morgan
-3a - unsure packages: express-validator, cookie-parser, debug
-3b - unsure packages-views: ejs or hbs (example 4.1render a view)
-3c - if using streams: npm hn-latest-stream (example 4.2stream)
-4 - install packages
-5 - sort out app.s
-  5.1 - require express, http-errors, morgan
-  5.2 - const app = express()
-  5.3 - const PORT = process.env.PORT || 3000
-  5.4 - app.listen(PORT, () => console.log(`listening on port ${PORT}...`));
-  5.5 *** TEST IT WORK - node app.js
-  5.6 - module.exports = app;
-6 - set up server.js file
-  6.1 - move from app.js --> const PORT
-  6.2 - move from app.js --> app.listen
-  6.3 - require in app
-  6.4 *** TEST IT WORKS - node server.js
-  6.5 - change start script "start": "node server.js"
-  6.6 *** TEST IT WORKS - npm start
+1. - app.js file
+2. - server.js file
+3. - routes/index.js
+4. - npm packages: express@4, http-errors@1, morgan
+  1. - unsure packages: express-validator, cookie-parser, debug
+  2. - unsure packages-views: ejs or hbs (example 4.1render a view)
+  3. - if using streams: npm hn-latest-stream (example 4.2stream)
+5. - install packages
+6. - sort out app.s
+  1. - require express, http-errors, morgan
+  2. - const app = express()
+  3. - const PORT = process.env.PORT || 3000
+  4. - app.listen(PORT, () => console.log(`listening on port ${PORT}...`));
+  5. *** TEST IT WORK - node app.js
+  6. - module.exports = app;
+7. - set up server.js file
+  1. - move from app.js --> const PORT
+  2. - move from app.js --> app.listen
+  3. - require in app
+  4. *** TEST IT WORKS - node server.js
+  5. - change start script "start": "node server.js"
+  6. *** TEST IT WORKS - npm start
 
-7 - set up error catch in app.js file
-  7.1 at the end the catch all error middleware
-  7.2 if not GET method, then that validation
+8. - set up error catch in app.js file
+  1. - at the end the catch all error middleware
+  2. - if not GET method, then that validation
 
-8 - set up routes/index.js file
-  8.1 - const { Router } = require('express');
-  8.2 - const router = Router();
-  8.3 - create the GET etc
-  8.4 - module.exports = router;
-  8.5 - back in app.js
-    8.5.1 - require the indexRouter (path) at top of file
-    8.5.2 - app.use('/', indexRouter); above other middleware
-
-
-
-
+9. - set up routes/index.js file (see labs6.2_Implement RESTful..)
+  1. - const { Router } = require('express');
+  2. - const router = Router();
+  3. - create the GET etc
+  4. - module.exports = router;
+  5. - back in app.js
+    1. - require the indexRouter (path) at top of file
+    2. - app.use('/', indexRouter); above other middleware
 
 
 
