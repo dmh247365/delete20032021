@@ -73,6 +73,182 @@
     1. - require the indexRouter (path) at top of file
     2. - app.use('/', indexRouter); above other middleware
 
+#### example:
+
+```js
+// server.js
+app = require('./app');
+
+const PORT = process.env.PORT || 3000;
+
+app.listen(PORT, () => console.log(`listening on port ${PORT}...`));
+```
+
+```js
+// app.js
+const express = require('express');
+const createError = require('http-errors');
+const logger = require('morgan');
+
+const boatRouter = require('./routes/boat');
+
+const app = express();
+
+app.use(logger('dev'));
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+
+app.use('/boat', boatRouter);
+
+// *** if you wanted to block non GET
+// app.use('/', (req, res, next) => {
+//  if(req.method !== 'GET') return next(createError(405));
+//    next(createError(404))
+//});
+
+// catch 404
+app.use(function(req, res, next) {
+  next(createError(404));
+});
+
+// error handler
+app.use(function(err, req, res, next) {
+  console.log('im in the app.js error catch all');
+  res.status(err.status || 500);
+  res.send({
+    type: 'error',
+    status: err.status,
+    message: err.message,
+    stack: req.app.get('env') === 'development' ? err.stack : undefined
+  })
+});
+
+
+
+module.exports = app;
+```
+
+```js
+// routes/boat.js
+const { Router } = require('express');
+const router = Router();
+const model = require('../model');
+
+
+router.get('/:id', function(req,res, next) {
+    model.boat.read(req.params.id,(err, result) => {
+      if(err) {
+        if(err.message === 'not found') next();
+        else next(err);
+      } else {
+        res.send(result);
+      }
+    });
+  });
+
+router.post('/', function(req,res, next) {
+  const id = model.boat.uid();
+  model.boat.create(id, req.body.data, (err) => {
+    if(err) {
+      next(err)
+    } else {
+      res.status(201).send({id});
+    }
+  });
+});
+
+router.delete('/:id', function(req, res, next) {
+  model.boat.del(req.params.id, (err) => {
+    if(err) {
+      if(err.message === 'not found') next();
+      else next(err);
+    } else {
+      res.status(204).send();
+    }
+  })
+})
+
+  module.exports = router;
+
+```
+
+```js
+// model.js
+'use strict'
+
+  module.exports = {
+    boat: boatModel()
+  }
+  
+  function boatModel () {
+    const db = {
+      1: { brand: 'Chaparral', color: 'red' },
+      2: { brand: 'Chaparral', color: 'blue' }
+    }
+  
+    return {
+      uid,
+      create,
+      read,
+      update,
+      del
+    }
+  
+    function uid () {
+      return Object.keys(db)
+        .sort((a, b) => a - b)
+        .map(Number)
+        .filter((n) => !isNaN(n))
+        .pop() + 1 + ''
+    }
+  
+    function create (id, data, cb) {
+      if (db.hasOwnProperty(id)) {
+        const err = Error('resource exists')
+        err.code = 'E_RESOURCE_EXISTS'
+        setImmediate(() => cb(err))
+        return
+      }
+      db[id] = data
+      setImmediate(() => cb(null, id))
+    }
+  
+    function read (id, cb) {
+      if (!(db.hasOwnProperty(id))) {
+        const err = Error('not found')
+        err.code = 'E_NOT_FOUND'
+        setImmediate(() => cb(err))
+        return
+      }
+      setImmediate(() => cb(null, db[id]))
+    }
+  
+    function update (id, data, cb) {
+      if (!(db.hasOwnProperty(id))) {
+        const err = Error('not found')
+        err.code = 'E_NOT_FOUND'
+        setImmediate(() => cb(err))
+        return
+      }
+      db[id] = data
+      setImmediate(() => cb())
+    }
+  
+    function del (id, cb) {
+
+      if (!(db.hasOwnProperty(id))) {
+        const err = Error('not found')
+        err.code = 'E_NOT_FOUND'
+        setImmediate(() => cb(err))
+        return
+      }
+      delete db[id]
+      setImmediate(() => cb())
+    }
+  }
+```
+
+
 
 
                 -----------------------------------------------------------------------------
