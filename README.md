@@ -81,6 +81,55 @@
 
                 -----------------------------------------------------------------------------
 
+### status codes
+
+
+
+                -----------------------------------------------------------------------------
+
+### CommonJS files when used in ES modules
+
+For example, consider a CommonJS module written:-
+
+```js
+//cjs.cjs
+exports.name = 'exported';
+```
+
+We can bring it into our ES Module as follows:-
+
+```js
+import { name } from './cjs.cjs';
+console.log(name);
+// Prints: 'exported'
+
+
+import cjs from './cjs.cjs';
+console.log(cjs);
+// Prints: { name: 'exported' }
+
+```
+
+#### In most cases, the ES module `import` can be used to load CommonJS modules.
+#### CommonJS has no `require`, `exports` or `module.exports`.
+
+If we do need to require a commonJS then we can do the following:-
+
+```js
+import { createRequire } from 'module';
+const require = createRequire(import.meta.url);
+
+/// sibling-module.js is a commonJS module.
+const siblingModule = require('./sibling-module');
+```
+
+
+
+
+                -----------------------------------------------------------------------------
+
+
+
 ### A) Node echo terminal commands:-
 
 PORT -- Setting & starting env variables 
