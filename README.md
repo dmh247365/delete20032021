@@ -31,10 +31,6 @@
 
 &nbsp;
 
-**IMPORTANT ADD IN GENERAL EXPRESS SET UP WITH ROUTING** 
-
-
-
                 -----------------------------------------------------------------------------
 
 ### What to do:- (LAB6.2_implement_RESTful..DELETE) is a good example
@@ -82,7 +78,13 @@
                 -----------------------------------------------------------------------------
 
 ### status codes
-
+ 1. 200 = ok (http request done)
+ 2. 201 = created (the request has been fulfilled)
+ 3. 400 = Bad Request (ie /foo maybe)
+ 4. 403 = Forbidden (trying to do something your not allowed)
+ 5. 404 = Not Found (if looking for a particular bike based on id)
+ 6. 405 = Method Not Allowed (ie POST etc)
+ 7. 500 = Internal Server Error
 
 
                 -----------------------------------------------------------------------------
